@@ -1,0 +1,203 @@
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+            three.js webgl - rotate object around point
+        </title>
+        <meta charset="utf-8">
+            <style>
+                body {
+        background-color:  #b3ccff;
+        
+        margin: 0;
+        overflow: hidden;
+    }
+            </style>
+            <script src="three.min.js">
+            </script>
+            <script type="text/javascript" src="sistema.js"></script>
+            <script>
+                var camera, scene, renderer;
+    var geometry, material, mesh, ref, pivotPoint;
+    var clock;
+
+        function init() {
+            
+            renderer = new THREE.WebGLRenderer();
+        
+            //renderer.setClearColor(0x1a53ff,1);
+            
+           renderer.setSize( window.innerWidth, window.innerHeight );
+            
+            document.body.appendChild( renderer.domElement );
+           
+           //sol
+            scene = new THREE.Scene();
+          geometry = new THREE.SphereGeometry( 1.5, 20, 20 );
+         material = new THREE.MeshPhongMaterial();
+        ref = new THREE.Mesh( geometry, material );
+            material.map = THREE.ImageUtils.loadTexture('img/sol/preview_sun.jpg');
+        ref.position.set(0,0,0);
+            scene.add( ref );
+
+            pivotPoint = new THREE.Object3D();
+            pivotPoint.position.set(0,0,0);/*posicion del circulo x y tamano*/
+            scene.add( pivotPoint );
+           
+            //esfera = new THREE.SphereGeometry( 0.6, 20, 20 );
+
+            esfera = new THREE.SphereGeometry( 0.8, 20, 20 );
+            materiall = new THREE.MeshPhongMaterial();
+            azul= new THREE.Mesh( esfera, materiall );
+             materiall.map = THREE.ImageUtils.loadTexture('img/saturno/saturnoanillo.png ');
+            pivotPoint.add(azul);
+            azul.position.set(-3,3,0)
+
+
+
+
+
+
+//hhjk
+             
+            geome = new THREE.SphereGeometry( 0.6, 20, 20 );
+            materia = new THREE.MeshPhongMaterial();
+            mesha = new THREE.Mesh( geome, materia );
+            materia.map = THREE.ImageUtils.loadTexture('img/mercurio/mercurymap.jpg');
+            pivotPoint.add(mesha);
+            mesha.position.set(0,-7,0)
+
+           
+            
+            geometry = new THREE.SphereGeometry( 0.6, 20, 20 );
+            material = new THREE.MeshPhongMaterial();
+            mesh = new THREE.Mesh( geometry, material );
+            material.map = THREE.ImageUtils.loadTexture('img/neptuno/neptunemap.jpg');
+           pivotPoint.add(mesh);
+            mesh.position.set(2,5,0)
+            
+
+          
+              
+            g = new THREE.SphereGeometry( 0.6, 20, 20 );
+            m = new THREE.MeshPhongMaterial();
+            rosa = new THREE.Mesh( g, m );
+           
+           m.map = THREE.ImageUtils.loadTexture('img/urano/uranoanillo.png');
+            pivotPoint.add(rosa);
+            rosa.position.set(3,-0,0)
+
+ 
+              
+            geometry = new THREE.SphereGeometry( 0.6, 20, 20 );
+            material = new THREE.MeshPhongMaterial();
+           mesh = new THREE.Mesh( geometry, material );
+           material.map = THREE.ImageUtils.loadTexture('img/venus/venusmap.jpg');
+           material.bumpMap = THREE.ImageUtils.loadTexture('img/venus/venusbump.jpg');
+            pivotPoint.add(mesh);
+            mesh.position.set(2,-2,0)
+
+        
+
+             geometry = new THREE.SphereGeometry( 0.6, 20, 20 );
+            material = new THREE.MeshPhongMaterial();
+            mesh = new THREE.Mesh( geometry, material );
+            material.map = THREE.ImageUtils.loadTexture('img/saturno/saturnmap.jpg');
+            pivotPoint.add(mesh);
+            mesh.position.set(0,-3,0)
+
+              
+
+            geometry = new THREE.SphereGeometry( 0.6, 20, 20 );
+            material = new THREE.MeshPhongMaterial();
+            mesh = new THREE.Mesh( geometry, material );
+            material.map = THREE.ImageUtils.loadTexture('img/marte/mars_1k_color.jpg');
+            pivotPoint.add(mesh);
+            mesh.position.set(-2,-2,0)
+ 
+             geometry = new THREE.SphereGeometry( 0.6, 20, 20 );
+            material = new THREE.MeshPhongMaterial();
+            mesh = new THREE.Mesh( geometry, material );
+            material.map = THREE.ImageUtils.loadTexture('img/jupiter/jupitermap.jpg');
+            pivotPoint.add(mesh);
+            mesh.position.set(-3,0,0)
+           
+
+
+
+            camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.6, 20 );
+            camera.position.set (0,14,-1);
+           
+            camera.lookAt(pivotPoint.position);
+            
+            
+            
+            var ambient = new THREE.AmbientLight(0xADFF67,1);
+           
+            scene.add(ambient);
+            var light = new THREE.DirectionalLight(0xff00EE, 6, 80, 8 );
+            light.position.set(-10, 15 , 15); 
+            light.castShadow = true;
+            scene.add(light);
+
+            clock = new THREE.Clock();
+            window.addEventListener( 'resize', onWindowResize, false );
+
+        }
+
+        var dir=1;
+        function animate() {
+            requestAnimationFrame( animate );
+            
+            var delta =  clock.getDelta();
+
+            pivotPoint.rotation.z += delta * 1;
+            
+            renderer.render( scene, camera );
+        }
+        
+        function onWindowResize() {
+
+                windowHalfX = window.innerWidth / 2;
+                windowHalfY = window.innerHeight / 2;
+                 
+                camera.aspect = window.innerWidth / window.innerHeight;
+                camera.updateProjectionMatrix();
+
+                renderer.setSize( window.innerWidth, window.innerHeight );
+
+        }
+        
+        window.addEventListener("DOMContentLoaded", function(event) {
+            init();
+            animate();
+        }
+
+
+
+
+        );
+
+
+
+            </script>
+        </meta>
+    </head>
+    <body>
+        <center>
+            <header>
+                <h1>
+                    SISTEMA SOLAR
+                    <H1>DESARROLLO DE APLICACIONES MULTIMEDIA INTERACTIVA</H1>
+                
+                </h1>
+            </header>
+        </center>
+
+        
+
+    </div> 
+
+    </body>
+</html>
